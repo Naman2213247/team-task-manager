@@ -49,7 +49,7 @@ function Login() {
         className="card shadow p-4"
         style={{ width: "100%", maxWidth: "450px" }}
       >
-        <h2 className="mb-4 text-dark text-center fw-bold">Login</h2>
+        <h2 className="text-center mb-4">Login</h2>
 
         {message && (
           <div

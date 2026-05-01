@@ -1,5 +1,3 @@
-// server/routes/taskRoutes.js
-
 const express = require("express");
 const Task = require("../models/Task");
 const Project = require("../models/Project");
@@ -76,7 +74,7 @@ if (
   res.status(500).json({
     success: false,
     message: error.message,
-    stack: error.stack,
+    stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
     errors: error.errors || null,
   });
 }
