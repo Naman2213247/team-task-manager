@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   // Signup
   const signup = async (formData) => {
     try {
-      const res = await api.post("/auth/signup", formData);
+      const res = await api.post("api/auth/signup", formData);
 
       const { token, user } = res.data;
 
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
   // Login
   const login = async (formData) => {
     try {
-      const res = await api.post("/auth/login", formData);
+      const res = await api.post("api/auth/login", formData);
 
       const { token, user } = res.data;
 
