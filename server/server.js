@@ -20,26 +20,41 @@ const app = express();
 
 /* ---------------- CORS CONFIG FIX ---------------- */
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:3000",
-  "https://team-task-manager-production-f602.up.railway.app"
-];
+// const allowedOrigins = [
+//   "http://localhost:5173",
+//   "http://localhost:3000",
+//   "https://team-task-manager-production-f602.up.railway.app"
+// ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow Postman / server-to-server requests
-    if (!origin) return callback(null, true);
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // Allow Postman / server-to-server requests
+//     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
+//     if (allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     }
 
-    return callback(new Error("Blocked by CORS policy: Not allowed origin"));
-  },
-  credentials: true
-}));
+//     return callback(new Error("Blocked by CORS policy: Not allowed origin"));
+//   },
+//   credentials: true
+// }));
 
+const cors = require("cors");
+
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "https://team-task-manager-production-f602.up.railway.app"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
+
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
 /* -------------------------------------------------- */
 
 // Middleware
