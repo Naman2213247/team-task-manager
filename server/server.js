@@ -18,11 +18,31 @@ const taskRoutes = require("./routes/taskRoutes");
 
 const app = express();
 
-// Middleware
+/* ---------------- CORS CONFIG FIX ---------------- */
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://team-task-manager-production-f602.up.railway.app"
+];
+
 app.use(cors({
-  origin:   "https://team-task-manager-production-f602.up.railway.app",
+  origin: function (origin, callback) {
+    // Allow Postman / server-to-server requests
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Blocked by CORS policy: Not allowed origin"));
+  },
   credentials: true
 }));
+
+/* -------------------------------------------------- */
+
+// Middleware
 app.use(express.json());
 
 // Root Route
@@ -37,7 +57,7 @@ app.use("/api/tasks", taskRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error("Server Error:", err.stack);
+  console.error("Server Error:", err.message);
 
   res.status(err.status || 500).json({
     success: false,
