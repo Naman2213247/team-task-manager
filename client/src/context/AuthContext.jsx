@@ -14,9 +14,17 @@ export const useAuth = () => {
 // Provider
 export const AuthProvider = ({ children }) => {
   // Load user from localStorage if exists
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
+  // const [user, setUser] = useState(
+  //   JSON.parse(localStorage.getItem("user")) || null
+  // );
+  const [user, setUser] = useState(() => {
+  try {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  } catch (error) {
+    return null;
+  }
+});
 
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
