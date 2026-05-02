@@ -4,8 +4,8 @@ A full-stack web application for managing team projects, assigning tasks, and tr
 
 ## Live Demo
 
-Frontend:     https://team-task-manager-production-f602.up.railway.app 
-Backend API: https://passionate-prosperity-production-5c7e.up.railway.app
+Frontend:   beautiful-magic-production-18cf.up.railway.app
+Backend API: passionate-prosperity-production-4865.up.railway.app
 
 ## GitHub Repository
 
